@@ -22,8 +22,11 @@ push する」だけ**に最小化されています。
 | 状態ファイル | リポジトリ直下 `kobayashi_article_reminder_ts.json` |
 | タイムゾーン | JST（Asia/Tokyo）固定 |
 
-> **前提**: 環境変数 `SLACK_BOT_TOKEN`（bot「Mantaさん」の `xoxb-` トークン）が Routine 環境に
-> 設定されていること。未設定だと送信・確認系コマンドは明確にエラー終了します（誤送信はしません）。
+> **前提（2点）**:
+> 1. 環境変数 `SLACK_BOT_TOKEN`（bot「Mantaさん」の `xoxb-` トークン）が Routine 環境に設定されていること。
+>    未設定だと送信・確認系コマンドは明確にエラー終了します（誤送信はしません）。
+> 2. Routine 環境の **Network access が `slack.com` を許可**していること（Custom で `slack.com` /
+>    `*.slack.com` を追加）。既定の Trusted では `slack.com` 直叩きが HTTP 403 になります。詳細は README 参照。
 
 ---
 

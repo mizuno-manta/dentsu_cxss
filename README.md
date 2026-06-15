@@ -41,6 +41,26 @@
 
 ## 前提条件（必須設定）
 
+### (1) ネットワークアクセス: `slack.com` を許可する【重要】
+
+本方式はスクリプトが **`slack.com` を直接呼び出す**ため、環境のネットワークアクセスを
+許可する必要があります。既定の **Trusted** では `slack.com` は許可リスト外で **HTTP 403** に
+なります（MCP コネクタは Anthropic 経由のため影響を受けませんが、本方式はトークン直叩きです）。
+
+- 環境設定（クラウドアイコン → 環境を編集 → **Network access**）で **Custom** を選択。
+- **Allowed domains** に以下を追加（1行1ドメイン）:
+  ```
+  slack.com
+  *.slack.com
+  ```
+- 「**Also include default list of common package managers**」は**チェックのまま**にして、
+  git/パッケージレジストリへの既定許可を維持する。
+
+> 参考: Network access のレベルは None / Trusted / Full / Custom。`slack.com` だけ許可したい
+> 場合は Custom が最小権限。Routine も同じ環境設定が適用されます。
+
+### (2) bot トークン: `SLACK_BOT_TOKEN`
+
 bot「Mantaさん」名義で送受信するため、**Routine 環境の環境変数に `SLACK_BOT_TOKEN`
 （`xoxb-...`）を設定**してください。未設定の場合、送信・確認系コマンドは誤送信せず明確に
 エラー終了します。
